@@ -1,8 +1,4 @@
-#ifdef WIN32
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
-#endif
 #include <cstddef>
 #include <iostream>
 #include <string>
@@ -10,7 +6,13 @@
 
 #include "absl/types/variant.h"
 
-using Property = absl::variant<int32_t, std::string>;
+class D {
+public:
+  ~D() {
+    std::cout << "Loud!!" << std::endl;
+  }
+};
+using Property = absl::variant<int32_t, D>;
 int main() {
   std::vector<Property> props;
   props.push_back(32);
